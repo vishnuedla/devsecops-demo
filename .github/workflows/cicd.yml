@@ -1,0 +1,36 @@
+name: devsecops pipeline
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'kubernetes/deployment.yaml'
+
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Unit testing
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@4
+      - name: setup nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Installing dependencies
+        run: npm ci
+      - name: Unit testing
+        run: npm test
+    
+
+    
+
+    
+
+
+   
+    
